@@ -3,15 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "dotenv": "^4.0.0",
-    "axios": "^0.17.0",
-=======
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
->>>>>>> 36e1f319e2693eccad19860a656039dd50a0cab5
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",

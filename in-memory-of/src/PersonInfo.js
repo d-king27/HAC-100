@@ -17,7 +17,7 @@ class App extends Component {
 
             <div>
                <h2>{this.props.name}</h2>
-               <h3>Passed away on {this.props.deathDate}</h3>
+               <h3>Born on {this.props.deathDate}</h3>
                <h3>Funeral to be held on {this.props.funeralDate}</h3>
             </div>
 

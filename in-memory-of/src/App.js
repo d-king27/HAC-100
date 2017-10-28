@@ -16,10 +16,10 @@ class App extends Component {
         DoB:'',
         DoF:'',
         likes:'',
-        charity:'',
         relation:'',
         fbUser: '',
-        fbPass: ''
+        fbPass: '',
+        charity: ''
       },
       comments:['this is a comment'],
       value:'',
@@ -58,7 +58,7 @@ addCommentToState(comment){
     DoB: this.state.input.DoB,
     funeralDate : this.state.input.DoF,
     likes:'',
-    charityUrl: ''}
+    charityUrl: this.state.input.charity}
 console.log('called')
 return axios.get('http://localhost:3001')
 .then((response) =>{
@@ -67,7 +67,6 @@ return axios.get('http://localhost:3001')
   newProf.likes = response.data.likes
 return axios.get('http://localhost:3001/roundtwo')
 .then((respo)=>{
-  newProf.charityUrl = respo.data.charityUrl
   this.setState({
     profile:newProf,
     Bool:true
@@ -97,7 +96,8 @@ return axios.get('http://localhost:3001/roundtwo')
           
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
-            <option value='husband'>Grandparent</option>
+            <option value=''>select relation</option>
+            <option value='grandparent'>Grandparent</option>
             <option value='parent'>Parent</option>
             <option value='friend'>Friend</option>
             <option value='partner'>Partner</option>
@@ -115,6 +115,13 @@ return axios.get('http://localhost:3001/roundtwo')
           <p>Password</p>
           <input type='password' name="password" onChange={this.genHandleChange('fbPass')}/>
           <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
+          <p>Add charities</p>
+          <select onChange={this.genHandleChange('charity')}>
+            <option>select</option>
+            <option>Macmillan</option>
+            <option>Oxfam</option>
+            <option>Cancer Research</option>
+          </select>
         </form>
       </div>
     )
