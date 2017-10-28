@@ -11,21 +11,22 @@ class App extends Component {
     super(props)
     this.state = {
       input:{
-        formName:'',
+        firstName:'',
+        lastName: '',
         DoB:'',
-        rel:'',
-        DoD:'',
-        funeralDate:'',
+        DoF:'',
         likes:'',
-        charity:''
-
+        charity:'',
+        relation:'',
+        fbUser: '',
+        fbPass: ''
       },
       comments:['this is a comment'],
       value:'',
       profile:{
         name:'',
         imgUrl:'',
-        deathDate:'',
+        DoB:'',
         funeralDate : '',
         likes:[],
         charityUrl: ''
@@ -33,14 +34,14 @@ class App extends Component {
       },
       Bool:false
     }
-  this.addCommentToState = this.addCommentToState.bind(this)
+  this.addCommentToState = this.addCommentToState.bind(this);
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-  this.renderBody = this.renderBody.bind(this)
-  this.renderForm = this.renderForm.bind(this)
-  this.changeTestBool = this.changeTestBool.bind(this)
-  this.formHandleSubmit = this.formHandleSubmit.bind(this)
-  
+  this.renderBody = this.renderBody.bind(this);
+  this.renderForm = this.renderForm.bind(this);
+  this.genProfile = this.genProfile.bind(this);
+  this.formHandleSubmit = this.formHandleSubmit.bind(this);
+  this.genHandleChange = this.genHandleChange.bind(this);
   }
 
 addCommentToState(comment){
@@ -50,21 +51,19 @@ addCommentToState(comment){
   })
  }
 
- changeTestBool(){
+ genProfile(){
    var newProf = {
-     name:'',
-   imgUrl:'',
-   deathDate:'',
-   funeralDate : '',
-   likes:'',
-   charityUrl: ''}
+    name: this.state.input.firstName + ' ' + this.state.input.lastName,
+    imgUrl:'',
+    DoB: this.state.input.DoB,
+    funeralDate : this.state.input.DoF,
+    likes:'',
+    charityUrl: ''}
 console.log('called')
 return axios.get('http://localhost:3001')
 .then((response) =>{
-  newProf.name = response.data.name
+  
   newProf.imgUrl = response.data.imgUrl
-  newProf.deathDate = response.data.deathDate
-  newProf.funeralDate = response.data.funeralDate
   newProf.likes = response.data.likes
 return axios.get('http://localhost:3001/roundtwo')
 .then((respo)=>{
@@ -81,7 +80,7 @@ return axios.get('http://localhost:3001/roundtwo')
 
  formHandleSubmit(e){
   e.preventDefault()
-  this.changeTestBool()
+  this.genProfile()
 }
 
  renderForm(){
@@ -89,12 +88,15 @@ return axios.get('http://localhost:3001/roundtwo')
      return (
       <div className='ProfileForm'>
         <form>
-          <h1>Title</h1>
-          <input type='checkbox' name='Auth-check' value="Facebook authentication keys?"/>
-          <input type='text' name='lname'/>
-          <input type='date' name='dob'/>
+          <h3>Create a tribute</h3>
+          <p>Please fill in this form to generate a tribute</p>
+          <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
+          <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
+          <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
+          <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
+          
           <p>What relation was your loved one?</p>
-          <select>
+          <select onChange={this.genHandleChange('relation')}>
             <option value='husband'>Grandparent</option>
             <option value='parent'>Parent</option>
             <option value='friend'>Friend</option>
@@ -108,6 +110,10 @@ return axios.get('http://localhost:3001/roundtwo')
             <option value='cousin'>Cousin</option>
             <option value='pet'>Pet</option>
           </select>
+          <p>Username</p>
+          <input type='text' name="username" onChange={this.genHandleChange('fbUser')}/>
+          <p>Password</p>
+          <input type='password' name="password" onChange={this.genHandleChange('fbPass')}/>
           <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
         </form>
       </div>
@@ -115,8 +121,24 @@ return axios.get('http://localhost:3001/roundtwo')
    }
  }
 
- renderBody(){
-   if(this.state.Bool === true)
+
+  genHandleChange(input){
+    return (event) => {
+      event.preventDefault();
+      let newInput = Object.assign({}, this.state.input, {
+        [input]: event.target.value
+      })
+      this.setState({
+       input: newInput
+      })
+    }
+  }
+
+
+  
+
+  renderBody(){
+    if(this.state.Bool === true)
     {return (<div>
     <PersonInfo
         name={this.state.profile.name}
