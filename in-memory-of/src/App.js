@@ -89,11 +89,14 @@ return axios.get('http://localhost:3001/roundtwo')
         <form>
           <h3>Create a tribute</h3>
           <p>Please fill in this form to generate a tribute</p>
+          <p>First name</p>
           <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
+          <p>Last name</p>
           <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
+          <p>Date of birth</p>
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
+          <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
-          
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
             <option value=''>select relation</option>
@@ -110,18 +113,14 @@ return axios.get('http://localhost:3001/roundtwo')
             <option value='cousin'>Cousin</option>
             <option value='pet'>Pet</option>
           </select>
-          <p>Username</p>
-          <input type='text' name="username" onChange={this.genHandleChange('fbUser')}/>
-          <p>Password</p>
-          <input type='password' name="password" onChange={this.genHandleChange('fbPass')}/>
-          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
-          <p>Add charities</p>
+          <p>Add charities (optional)</p>
           <select onChange={this.genHandleChange('charity')}>
             <option>select</option>
             <option>Macmillan</option>
             <option>Oxfam</option>
-            <option>Cancer Research</option>
+            <option>Cancer Research UK</option>
           </select>
+          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
         </form>
       </div>
     )
