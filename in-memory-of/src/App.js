@@ -10,6 +10,16 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      input:{
+        formName:'',
+        DoB:'',
+        rel:'',
+        DoD:'',
+        funeralDate:'',
+        likes:'',
+        charity:''
+
+      },
       comments:['this is a comment'],
       value:'',
       profile:{
@@ -29,6 +39,7 @@ class App extends Component {
   this.renderBody = this.renderBody.bind(this)
   this.renderForm = this.renderForm.bind(this)
   this.changeTestBool = this.changeTestBool.bind(this)
+  this.formHandleSubmit = this.formHandleSubmit.bind(this)
   
   }
 
@@ -65,18 +76,42 @@ return axios.get('http://localhost:3001/roundtwo')
 
 })
 })
-
-
-
-
-   this.setState({
-     Bool:!this.state.Bool
-   })
  }
+
+
+ formHandleSubmit(e){
+  e.preventDefault()
+  this.changeTestBool()
+}
 
  renderForm(){
    if(this.state.Bool === false){
-     return <ProfileForm change = {this.changeTestBool}/>
+     return (
+      <div className='ProfileForm'>
+        <form>
+          <h1>Title</h1>
+          <input type='checkbox' name='Auth-check' value="Facebook authentication keys?"/>
+          <input type='text' name='lname'/>
+          <input type='date' name='dob'/>
+          <p>What relation was your loved one?</p>
+          <select>
+            <option value='husband'>Grandparent</option>
+            <option value='parent'>Parent</option>
+            <option value='friend'>Friend</option>
+            <option value='partner'>Partner</option>
+            <option value='child'>Child</option>
+            <option value='sibling'>Sibling</option>
+            <option value='uncle'>Uncle</option>
+            <option value='auntie'>Auntie</option>
+            <option value='nephew'>Nephew</option>
+            <option value='niece'>Niece</option>
+            <option value='cousin'>Cousin</option>
+            <option value='pet'>Pet</option>
+          </select>
+          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
+        </form>
+      </div>
+    )
    }
  }
 
