@@ -4,20 +4,31 @@ import "./App.css";
 import Combox from "./Combox";
 import PersonInfo from "./PersonInfo";
 import ProfileForm from './ProfileForm'
+import axios from 'axios'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      comments:['test'],
+      input:{
+        formName:'',
+        DoB:'',
+        rel:'',
+        DoD:'',
+        funeralDate:'',
+        likes:'',
+        charity:''
+
+      },
+      comments:['this is a comment'],
       value:'',
       profile:{
-        name:'Gandalf the Grey',
-        imgUrl:'https://vignette.wikia.nocookie.net/lotr/images/8/8d/Gandalf-2.jpg/revision/latest?cb=20130209172436',
-        deathDate:'12/06/17',
-        funeralDate : '13/12/17',
-        likes:['Going on long hikes','Helping his friends','magic'],
-        charityUrl: 'https://www.macmillan.org.uk/donate/?gclid=Cj0KCQjw1dDPBRC_ARIsAJZrQfpkKhn3M7JJimbZPWsCmL6Dmz3TqHDypUgrMCo5fnTJNP5wBThVy3kaAgakEALw_wcB&gclsrc=aw.ds'
+        name:'',
+        imgUrl:'',
+        deathDate:'',
+        funeralDate : '',
+        likes:[],
+        charityUrl: ''
 
       },
       Bool:false
@@ -28,6 +39,7 @@ class App extends Component {
   this.renderBody = this.renderBody.bind(this)
   this.renderForm = this.renderForm.bind(this)
   this.changeTestBool = this.changeTestBool.bind(this)
+  this.formHandleSubmit = this.formHandleSubmit.bind(this)
   
   }
 
@@ -39,14 +51,67 @@ addCommentToState(comment){
  }
 
  changeTestBool(){
-   this.setState({
-     Bool:!this.state.Bool
-   })
+   var newProf = {
+     name:'',
+   imgUrl:'',
+   deathDate:'',
+   funeralDate : '',
+   likes:'',
+   charityUrl: ''}
+console.log('called')
+return axios.get('http://localhost:3001')
+.then((response) =>{
+  newProf.name = response.data.name
+  newProf.imgUrl = response.data.imgUrl
+  newProf.deathDate = response.data.deathDate
+  newProf.funeralDate = response.data.funeralDate
+  newProf.likes = response.data.likes
+return axios.get('http://localhost:3001/roundtwo')
+.then((respo)=>{
+  newProf.charityUrl = respo.data.charityUrl
+  this.setState({
+    profile:newProf,
+    Bool:true
+  })
+
+})
+})
  }
+
+
+ formHandleSubmit(e){
+  e.preventDefault()
+  this.changeTestBool()
+}
 
  renderForm(){
    if(this.state.Bool === false){
-     return <ProfileForm change = {this.changeTestBool}/>
+     return (
+      <div className='ProfileForm'>
+        <form>
+          <h1>Title</h1>
+          <input type='checkbox' name='Auth-check' value="Facebook authentication keys?"/>
+          <input type='text' name='lname'/>
+          <input type='date' name='dob'/>
+          <p>What relation was your loved one?</p>
+          <select>
+            <option value='husband'>Grandparent</option>
+            <option value='parent'>Parent</option>
+            <option value='friend'>Friend</option>
+            <option value='partner'>Partner</option>
+            <option value='child'>Child</option>
+            <option value='sibling'>Sibling</option>
+            <option value='uncle'>Uncle</option>
+            <option value='auntie'>Auntie</option>
+            <option value='nephew'>Nephew</option>
+            <option value='niece'>Niece</option>
+            <option value='cousin'>Cousin</option>
+            <option value='pet'>Pet</option>
+          </select>
+          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
+        </form>
+      </div>
+    )
    }
  }
 

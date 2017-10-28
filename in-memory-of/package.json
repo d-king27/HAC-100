@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "dotenv": "^4.0.0",
+=======
+    "axios": "^0.17.0",
+>>>>>>> 427c2d70d4adb00e26c9e6d8040c4365befc6807
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
