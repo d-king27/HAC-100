@@ -19,7 +19,7 @@ const getUserPicture = (req, res) => {
     }
     request(options)
     .then(fbres => {
-      res.json(JSON.parse(fbres))
+      res.send(fbres);
   })
     .catch((err) => {
         console.log(err)
@@ -102,12 +102,30 @@ const getNameFromId = (req, res) => {
   })
 }
 
+const getMe = (req, res) => {
 
+  const options = {
+      method: 'GET',
+      uri: FB_API + 'me',
+      qs: {
+          access_token: FB_TOKEN,
+          fields: "id,  likes, picture, feed, name, relationship_status, photos, birthday, friends "
+      }
+  }
+  request(options)
+  .then(fbres => {
+      res.json(JSON.parse(fbres))
+  })
+  .catch((err) => {
+      console.log(err)
+  })
+}
 app.use(json());
 
 app.get("/", function(req, res) {
   res.send("Hello World");
 });
+app.get('/me', getMe)
 app.get("/name/:id", getNameFromId)
 app.get("/picture/:id", getUserPicture);
 app.get("/likes/:id", getUserLikes)
