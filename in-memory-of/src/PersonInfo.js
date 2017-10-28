@@ -25,6 +25,12 @@ class App extends Component {
                     <img src ={this.props.imgUrl}/>
                 </div>
 
+                <div style = {style} className="PersonImage">
+                   <p>please give as much as you can do our charity of choice here:</p>
+                   <a href={this.props.charityUrl}>click here to donate</a>
+                </div>
+                
+
                 <div>
                     <h3>Gandalf liked...</h3>
                     <ul>

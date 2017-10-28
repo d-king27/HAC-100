@@ -16,10 +16,11 @@ class App extends Component {
         imgUrl:'https://vignette.wikia.nocookie.net/lotr/images/8/8d/Gandalf-2.jpg/revision/latest?cb=20130209172436',
         deathDate:'12/06/17',
         funeralDate : '13/12/17',
-        likes:['Going on long hikes','Helping his friends','magic']
+        likes:['Going on long hikes','Helping his friends','magic'],
+        charityUrl: 'https://www.macmillan.org.uk/donate/?gclid=Cj0KCQjw1dDPBRC_ARIsAJZrQfpkKhn3M7JJimbZPWsCmL6Dmz3TqHDypUgrMCo5fnTJNP5wBThVy3kaAgakEALw_wcB&gclsrc=aw.ds'
 
       },
-      testBool:false
+      Bool:false
     }
   this.addCommentToState = this.addCommentToState.bind(this)
   this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,7 @@ class App extends Component {
   this.renderBody = this.renderBody.bind(this)
   this.renderForm = this.renderForm.bind(this)
   this.changeTestBool = this.changeTestBool.bind(this)
+  
   }
 
 addCommentToState(comment){
@@ -38,18 +40,18 @@ addCommentToState(comment){
 
  changeTestBool(){
    this.setState({
-     testBool:!this.state.testBool
+     Bool:!this.state.Bool
    })
  }
 
  renderForm(){
-   if(this.state.testBool === false){
+   if(this.state.Bool === false){
      return <ProfileForm change = {this.changeTestBool}/>
    }
  }
 
  renderBody(){
-   if(this.state.testBool === true)
+   if(this.state.Bool === true)
     {return (<div>
     <PersonInfo
         name={this.state.profile.name}
@@ -57,6 +59,7 @@ addCommentToState(comment){
         deathDate={this.state.profile.deathDate}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
+        charityUrl = {this.state.profile.charityUrl}
     />
       <Combox comments = {this.state.comments} />
       <form >
