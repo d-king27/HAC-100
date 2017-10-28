@@ -3,7 +3,7 @@ const app = express();
 const { json } = require("body-parser");
 const request = require("request-promise");
 require("dotenv").config();
-
+const {FB_TOKEN} = process.env;
 app.use(json());
 
 app.get("/", function(req, res) {
@@ -19,7 +19,8 @@ app.get("/facebook-search/:id", (req, res) => {
     method: "GET",
     uri: `https://graph.facebook.com/v2.8/${req.params.id}`,
     qs: {
-      access_token: user_access_token,
+
+      access_token: FB_TOKEN,
       fields: userFieldSet
     }
   };
