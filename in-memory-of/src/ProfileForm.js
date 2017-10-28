@@ -1,6 +1,15 @@
 import React from 'react';
 
 class ProfileForm extends React.Component {
+  constructor(props){
+    super(props)
+this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    this.props.change()
+  }
   render() {
     return (
       <div className='ProfileForm'>
@@ -24,7 +33,7 @@ class ProfileForm extends React.Component {
             <option value='cousin'>Cousin</option>
             <option value='pet'>Pet</option>
           </select>
-          <input type='submit'/>
+          <input type="submit" value="Submit" onClick={this.handleSubmit} />
         </form>
       </div>
     );
