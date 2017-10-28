@@ -11,6 +11,14 @@ class App extends Component {
     this.state = {
       comments:['test'],
       value:'',
+      profile:{
+        name:'Gandalf the Grey',
+        imgUrl:'https://vignette.wikia.nocookie.net/lotr/images/8/8d/Gandalf-2.jpg/revision/latest?cb=20130209172436',
+        deathDate:'12/06/17',
+        funeralDate : '13/12/17',
+        likes:['Going on long hikes','Helping his friends','magic']
+
+      },
       testBool:false
     }
   this.addCommentToState = this.addCommentToState.bind(this)
@@ -43,7 +51,13 @@ addCommentToState(comment){
  renderBody(){
    if(this.state.testBool === true)
     {return (<div>
-    <PersonInfo/>
+    <PersonInfo
+        name={this.state.profile.name}
+        imgUrl={this.state.profile.imgUrl}
+        deathDate={this.state.profile.deathDate}
+        likes={this.state.profile.likes}
+        funeralDate = {this.state.profile.funeralDate}
+    />
       <Combox comments = {this.state.comments} />
       <form >
           <label>

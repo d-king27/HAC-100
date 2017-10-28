@@ -3,6 +3,12 @@ import React, {Component} from 'react';
 class App extends Component {
     constructor (props) {
         super(props);
+        this.renderLikes = this.renderLikes.bind(this)
+    }
+    renderLikes(){
+        return this.props.likes.map((like)=>{
+            return ( <li>{like}</li>)
+        })
     }
     render () {
         const style = {outlineStyle: "solid"}
@@ -10,19 +16,19 @@ class App extends Component {
             <div style ={style} className="PersonInfo">
 
             <div>
-               <h2>Gandalf the Grey</h2>
-               <h3>Passed away on 12/06/17</h3>
+               <h2>{this.props.name}</h2>
+               <h3>Passed away on {this.props.deathDate}</h3>
+               <h3>Funeral to be held on {this.props.funeralDate}</h3>
             </div>
 
                 <div style = {style} className="PersonImage">
-                    <img src ="https://vignette.wikia.nocookie.net/lotr/images/8/8d/Gandalf-2.jpg/revision/latest?cb=20130209172436"/>
+                    <img src ={this.props.imgUrl}/>
                 </div>
 
                 <div>
                     <h3>Gandalf liked...</h3>
                     <ul>
-                        <li>Going on long hikes</li>
-                        <li>Helping his friends</li>
+                        {this.renderLikes()}
                     </ul>
                 </div>
             </div>
