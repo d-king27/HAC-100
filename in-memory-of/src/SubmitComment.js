@@ -16,13 +16,15 @@ class SubmitComment extends Component {
       }
     
       handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
+        this.props.addCommentToState(this.state.value)
+        this.setState({
+          value:''
+        })
       }
     
       render() {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <form onClick={this.handleSubmit}>
             <label>
               <input type="text" value={this.state.value} onChange={this.handleChange} />
             </label>
