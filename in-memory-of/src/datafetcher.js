@@ -66,13 +66,14 @@ const getUserFriends= (req, res) => {
         method: 'GET',
         uri: FB_API + id,
         qs: {
-          access_token: FB_TOKEN
+          access_token: FB_TOKEN,
+          fields: 'name'
         }
       }
-      request(options)
-      .then(data => {
-        return data
-      })
+      return request(options)
+      // .then(data => {
+      //   return data
+      // })
 
     })
     return Promise.all(friendsArr)
@@ -84,6 +85,22 @@ const getUserFriends= (req, res) => {
       console.log(err)
   })
 }
+const getNameFromId = (req, res) => {
+  const {id} = req.params
+  const options = {
+    method: 'GET',
+    uri: FB_API + id,
+    qs: {
+      access_token: FB_TOKEN,
+      fields: 'name'
+    }
+  }
+  request(options)
+  .then(data => {
+    console.log(data)
+    res.send(data)
+  })
+}
 
 
 app.use(json());
@@ -91,7 +108,7 @@ app.use(json());
 app.get("/", function(req, res) {
   res.send("Hello World");
 });
-// app.get("/name/:id", getNameFromId)
+app.get("/name/:id", getNameFromId)
 app.get("/picture/:id", getUserPicture);
 app.get("/likes/:id", getUserLikes)
 app.get("/friends/:id", getUserFriends)
