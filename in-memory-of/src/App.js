@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import 'uikit'
 import Combox from "./Combox";
 import PersonInfo from "./PersonInfo";
 import ProfileForm from './ProfileForm'
@@ -33,10 +34,9 @@ class App extends Component {
         funeralDate : '',
         likes:[],
         charityUrl: ''
-
       },
       Bool:false,
-      style:'inline-block'
+      style:'none'
     }
   this.addCommentToState = this.addCommentToState.bind(this);
   this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,6 @@ class App extends Component {
   this.renderBody = this.renderBody.bind(this);
   this.renderForm = this.renderForm.bind(this);
   this.genProfile = this.genProfile.bind(this);
-  this.formHandleSubmit = this.formHandleSubmit.bind(this);
   this.genHandleChange = this.genHandleChange.bind(this);
   this.renderPlaces = this.renderPlaces.bind(this)
   this.changeStyle = this.changeStyle.bind(this);
@@ -57,7 +56,8 @@ addCommentToState(comment){
   })
  }
 
- genProfile(){
+ genProfile(event){
+   event.preventDefault()
    var newProf = {
     name: this.state.input.firstName + ' ' + this.state.input.lastName,
     imgUrl:'',
@@ -70,33 +70,28 @@ addCommentToState(comment){
     relation:this.state.input.relation,
     eulogy:this.state.input.eulogy
   }
-
+  this.changeStyle(event)
   this.setState({
     profile:newProf,
     Bool:true
   })
-
  }
-
-
- formHandleSubmit(e){
-  e.preventDefault()
-  this.genProfile()
-}
 
 renderPlaces(){
   return str.split('\n').map((item)=>{
-    return (<option value={item}>{item}</option>)
+    return (<option value={item} key={item}>{item}</option>)
   })
 }
 
- renderForm(){
+ renderForm(userInfo){
+  console.log(userInfo)
    if(this.state.Bool === false){
      return (
       <div className='ProfileForm'>
         <form>
           <h3>Create a tribute</h3>
           <p>Please fill in this form to generate a tribute</p>
+
           <p>First name</p>
           <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
           <p>Last name</p>
@@ -104,14 +99,14 @@ renderPlaces(){
           <p>enter a url for the image to be displayed</p>
           <input type='text' name='fname' onChange={this.genHandleChange('imgUrl')}/>
           <p>Date of birth</p>
-          <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
+          <input type='date' name='dob' onChange={this.genHandleChange('DoB')} required/>
           <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
           <p>message about this person</p>
-          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')}/>
+          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')} required/>
 
           <p>What relation was your loved one?</p>
-          <select onChange={this.genHandleChange('relation')}>
+          <select onChange={this.genHandleChange('relation')} required>
             <option value=''>select relation</option>
             <option value='grandparent'>Grandparent</option>
             <option value='parent'>Parent</option>
@@ -137,13 +132,12 @@ renderPlaces(){
             <option>Oxfam</option>
             <option>Cancer Research UK</option>
           </select>
-          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
+          <input type="submit" value="Submit" onClick={this.genProfile} />
         </form>
       </div>
     )
    }
  }
-
 
   genHandleChange(input){
     return (event) => {
@@ -157,15 +151,14 @@ renderPlaces(){
     }
   }
 
-
-  
-
-  renderBody(){
+  renderBody(userInfo){
+    console.log(userInfo)
     if(this.state.Bool === true)
     {return (<div>
     <PersonInfo
-        name={this.state.profile.name}
-        imgUrl={this.state.input.imgUrl}
+        name={userInfo.name}
+        imgUrl={userInfo.pictureUrl}
+
         dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
@@ -173,7 +166,7 @@ renderPlaces(){
         bool = {this.state.bool}
         locale = {this.state.input.locale}
         relation = {this.state.input.relation}
-        eulogy = {this.props.eulogy}
+        eulogy = {this.state.input.eulogy}
     />
       <Combox comments = {this.state.comments} />
       <form >
@@ -211,13 +204,13 @@ this.setState({
 }
 
   render() {
+    let user = window.user || '';
     const style = {display: this.state.style }
     return (
       <div className="App">  
         <img src = '' id = 'profileImage' style = {style}/>
-         {this.renderForm()}
-        {this.renderBody()}
-        <button onClick={this.changeStyle}>click me </button>
+        {this.renderForm(user)}
+        {this.renderBody(user)}
       </div>
     );
   }
