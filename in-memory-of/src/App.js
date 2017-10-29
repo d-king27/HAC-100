@@ -136,10 +136,6 @@ renderPlaces(){
           <select onChange={this.genHandleChange('locale')}>
             {this.renderPlaces()}
           </select>
-          <p>postcode</p>
-          <input type='text' name='postcode' onChange={this.genHandleChange('postcode')}/>
-          <p>What was the person's passion</p>
-          <input type='text' name='likes' onChange={this.genHandleChange('likes')}/>
           <p>Add charities (optional)</p>
           <select onChange={this.genHandleChange('charity')}>
             <option>select</option>
@@ -180,6 +176,9 @@ renderPlaces(){
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
         charityUrl = {this.state.profile.charityUrl}
+        bool = {this.state.bool}
+        locale = {this.state.input.locale}
+        relation = {this.state.input.relation}
     />
       <Combox comments = {this.state.comments} />
       <form >
