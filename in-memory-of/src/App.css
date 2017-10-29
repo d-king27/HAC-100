@@ -1,28 +1,35 @@
-.App {
+body {
+  background-color: #F6EDD3;
+  font-family: 'Lato', sans-serif;
+}
+
+.PersonInfo {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.profileHead{
+  color: #fff;
+  background-color: #0A1829;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.PersonImage {
+  display: inline-block;
+  margin: 20px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.profileImg {
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px 3px #000;
 }
 
-.App-intro {
-  font-size: large;
+profileDetails{
+  display: flex;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.eulogy{
+  width: 80%
 }

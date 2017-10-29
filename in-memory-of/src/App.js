@@ -149,7 +149,7 @@ return axios.get('http://localhost:3001/roundtwo')
     <PersonInfo
         name={this.state.profile.name}
         imgUrl={this.state.profile.imgUrl}
-        deathDate={this.state.profile.deathDate}
+        dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
         charityUrl = {this.state.profile.charityUrl}
