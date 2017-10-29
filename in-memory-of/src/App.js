@@ -20,7 +20,9 @@ class App extends Component {
         fbUser: '',
         fbPass: '',
         charity: '',
-        locale:''
+        locale:'',
+        postcode:'',
+        des:''
       },
       comments:['this is a comment'],
       value:'',
@@ -59,8 +61,14 @@ addCommentToState(comment){
     imgUrl:'',
     DoB: this.state.input.DoB,
     funeralDate : this.state.input.DoF,
-    likes:'',
-    charityUrl: this.state.input.charity}
+    likes:this.state.input.likes,
+    charityUrl: this.state.input.charity,
+    postcode: this.state.input.postcode,
+    locale: this.state.input.locale,
+    relation:this.state.input.relation,
+  }
+    
+
 console.log('called')
 return axios.get('http://localhost:3001')
 .then((response) =>{
@@ -105,6 +113,9 @@ renderPlaces(){
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
           <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
+          <p>message about this person</p>
+          <textarea type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
+
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
             <option value=''>select relation</option>
@@ -125,6 +136,10 @@ renderPlaces(){
           <select onChange={this.genHandleChange('locale')}>
             {this.renderPlaces()}
           </select>
+          <p>postcode</p>
+          <input type='text' name='postcode' onChange={this.genHandleChange('postcode')}/>
+          <p>What was the person's passion</p>
+          <input type='text' name='likes' onChange={this.genHandleChange('likes')}/>
           <p>Add charities (optional)</p>
           <select onChange={this.genHandleChange('charity')}>
             <option>select</option>
