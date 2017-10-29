@@ -91,6 +91,13 @@ renderPlaces(){
         <form>
           <h3>Create a tribute</h3>
           <p>Please fill in this form to generate a tribute</p>
+
+          <p>First name</p>
+          <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
+          <p>Last name</p>
+          <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
+          <p>enter a url for the image to be displayed</p>
+          <input type='text' name='fname' onChange={this.genHandleChange('imgUrl')}/>
           <p>Date of birth</p>
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')} required/>
           <p>Funeral date (optional)</p>
@@ -151,6 +158,7 @@ renderPlaces(){
     <PersonInfo
         name={userInfo.name}
         imgUrl={userInfo.pictureUrl}
+
         dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}

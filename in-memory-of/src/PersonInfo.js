@@ -33,6 +33,11 @@ class App extends Component {
             <div className="PersonInfo">
                 <div className="profileHead">
                     <div className="PersonImage">
+
+                        <div>
+                            <img src={this.props.imgUrl} />
+                        </div>
+
                     </div>
                     <div className="profileInfo ">
                         <h2 id='profileName'></h2>
