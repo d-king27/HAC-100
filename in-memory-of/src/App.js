@@ -36,7 +36,7 @@ class App extends Component {
 
       },
       Bool:false,
-      style:'inline-block'
+      style:'none'
     }
   this.addCommentToState = this.addCommentToState.bind(this);
   this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,6 @@ class App extends Component {
   this.renderBody = this.renderBody.bind(this);
   this.renderForm = this.renderForm.bind(this);
   this.genProfile = this.genProfile.bind(this);
-  this.formHandleSubmit = this.formHandleSubmit.bind(this);
   this.genHandleChange = this.genHandleChange.bind(this);
   this.renderPlaces = this.renderPlaces.bind(this)
   this.changeStyle = this.changeStyle.bind(this);
@@ -57,7 +56,8 @@ addCommentToState(comment){
   })
  }
 
- genProfile(){
+ genProfile(event){
+   event.preventDefault()
    var newProf = {
     name: this.state.input.firstName + ' ' + this.state.input.lastName,
     imgUrl:'',
@@ -70,23 +70,16 @@ addCommentToState(comment){
     relation:this.state.input.relation,
     eulogy:this.state.input.eulogy
   }
-
+  this.changeStyle(event)
   this.setState({
     profile:newProf,
     Bool:true
   })
-
  }
-
-
- formHandleSubmit(e){
-  e.preventDefault()
-  this.genProfile()
-}
 
 renderPlaces(){
   return str.split('\n').map((item)=>{
-    return (<option value={item}>{item}</option>)
+    return (<option value={item} key={item}>{item}</option>)
   })
 }
 
@@ -102,14 +95,14 @@ renderPlaces(){
           <p>Last name</p>
           <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
           <p>Date of birth</p>
-          <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
+          <input type='date' name='dob' onChange={this.genHandleChange('DoB')} required/>
           <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
           <p>message about this person</p>
-          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')}/>
+          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')} required/>
 
           <p>What relation was your loved one?</p>
-          <select onChange={this.genHandleChange('relation')}>
+          <select onChange={this.genHandleChange('relation')} required>
             <option value=''>select relation</option>
             <option value='grandparent'>Grandparent</option>
             <option value='parent'>Parent</option>
@@ -135,7 +128,7 @@ renderPlaces(){
             <option>Oxfam</option>
             <option>Cancer Research UK</option>
           </select>
-          <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
+          <input type="submit" value="Submit" onClick={this.genProfile} />
         </form>
       </div>
     )
@@ -154,9 +147,6 @@ renderPlaces(){
       })
     }
   }
-
-
-  
 
   renderBody(){
     if(this.state.Bool === true)
@@ -215,7 +205,6 @@ this.setState({
         <img src = '' id = 'profileImage' style = {style}/>
          {this.renderForm()}
         {this.renderBody()}
-        <button onClick={this.changeStyle}>click me </button>
       </div>
     );
   }
