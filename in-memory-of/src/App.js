@@ -101,6 +101,8 @@ renderPlaces(){
           <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
           <p>Last name</p>
           <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
+          <p>enter a url for the image to be displayed</p>
+          <input type='text' name='fname' onChange={this.genHandleChange('imgUrl')}/>
           <p>Date of birth</p>
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
           <p>Funeral date (optional)</p>
@@ -163,7 +165,7 @@ renderPlaces(){
     {return (<div>
     <PersonInfo
         name={this.state.profile.name}
-        imgUrl={this.state.profile.imgUrl}
+        imgUrl={this.state.input.imgUrl}
         dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
