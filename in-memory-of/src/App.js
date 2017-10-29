@@ -36,7 +36,7 @@ class App extends Component {
 
       },
       Bool:false,
-      style:'inline'
+      style:'inline-block'
     }
   this.addCommentToState = this.addCommentToState.bind(this);
   this.handleChange = this.handleChange.bind(this);
