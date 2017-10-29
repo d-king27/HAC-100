@@ -34,7 +34,7 @@
         appId: '146487849304058',
         autoLogAppEvents: true,
         xfbml: true,
-        version: 'v2.10'
+        version: 'v2.9'
       });
       FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
@@ -47,9 +47,12 @@
           });
           FB.api('/me', { fields: 'name' }, response => {
             window.user.name = response.name
-            // document.getElementById('profileName').innerText = response.name
-          }
-          )
+            document.getElementById('profileName').innerText = response.name
+          })
+          FB.api('/me', {fields: 'birthday'}, response => {
+            console.log(response)
+            window.user.dob = response
+          })
         }
         else {
           FB.login();

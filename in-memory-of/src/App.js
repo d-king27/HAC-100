@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import 'uikit'
 import Combox from "./Combox";
 import PersonInfo from "./PersonInfo";
 import ProfileForm from './ProfileForm'
@@ -33,7 +34,6 @@ class App extends Component {
         funeralDate : '',
         likes:[],
         charityUrl: ''
-
       },
       Bool:false,
       style:'none'
@@ -83,17 +83,14 @@ renderPlaces(){
   })
 }
 
- renderForm(){
+ renderForm(userInfo){
+  console.log(userInfo)
    if(this.state.Bool === false){
      return (
       <div className='ProfileForm'>
         <form>
           <h3>Create a tribute</h3>
           <p>Please fill in this form to generate a tribute</p>
-          <p>First name</p>
-          <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
-          <p>Last name</p>
-          <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
           <p>Date of birth</p>
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')} required/>
           <p>Funeral date (optional)</p>
@@ -135,7 +132,6 @@ renderPlaces(){
    }
  }
 
-
   genHandleChange(input){
     return (event) => {
       event.preventDefault();
@@ -148,12 +144,13 @@ renderPlaces(){
     }
   }
 
-  renderBody(){
+  renderBody(userInfo){
+    console.log(userInfo)
     if(this.state.Bool === true)
     {return (<div>
     <PersonInfo
-        name={this.state.profile.name}
-        imgUrl={this.state.profile.imgUrl}
+        name={userInfo.name}
+        imgUrl={userInfo.pictureUrl}
         dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
@@ -161,7 +158,7 @@ renderPlaces(){
         bool = {this.state.bool}
         locale = {this.state.input.locale}
         relation = {this.state.input.relation}
-        eulogy = {this.props.eulogy}
+        eulogy = {this.state.input.eulogy}
     />
       <Combox comments = {this.state.comments} />
       <form >
@@ -199,12 +196,13 @@ this.setState({
 }
 
   render() {
+    let user = window.user || '';
     const style = {display: this.state.style }
     return (
       <div className="App">  
         <img src = '' id = 'profileImage' style = {style}/>
-         {this.renderForm()}
-        {this.renderBody()}
+        {this.renderForm(user)}
+        {this.renderBody(user)}
       </div>
     );
   }
