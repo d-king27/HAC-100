@@ -19,7 +19,10 @@ class App extends Component {
         relation:'',
         fbUser: '',
         fbPass: '',
-        charity: ''
+        charity: '',
+        locale:'',
+        postcode:'',
+        eulogy:''
       },
       comments:['this is a comment'],
       value:'',
@@ -42,6 +45,7 @@ class App extends Component {
   this.genProfile = this.genProfile.bind(this);
   this.formHandleSubmit = this.formHandleSubmit.bind(this);
   this.genHandleChange = this.genHandleChange.bind(this);
+  this.renderPlaces = this.renderPlaces.bind(this)
   }
 
 addCommentToState(comment){
@@ -57,8 +61,15 @@ addCommentToState(comment){
     imgUrl:'',
     DoB: this.state.input.DoB,
     funeralDate : this.state.input.DoF,
-    likes:'',
-    charityUrl: this.state.input.charity}
+    likes:this.state.input.likes,
+    charityUrl: this.state.input.charity,
+    postcode: this.state.input.postcode,
+    locale: this.state.input.locale,
+    relation:this.state.input.relation,
+    eulogy:this.state.input.eulogy
+  }
+    
+
 console.log('called')
 return axios.get('http://localhost:3001')
 .then((response) =>{
@@ -82,6 +93,12 @@ return axios.get('http://localhost:3001/roundtwo')
   this.genProfile()
 }
 
+renderPlaces(){
+  return str.split('\n').map((item)=>{
+    return (<option value={item}>{item}</option>)
+  })
+}
+
  renderForm(){
    if(this.state.Bool === false){
      return (
@@ -97,6 +114,9 @@ return axios.get('http://localhost:3001/roundtwo')
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
           <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
+          <p>message about this person</p>
+          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')}/>
+
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
             <option value=''>select relation</option>
@@ -112,6 +132,10 @@ return axios.get('http://localhost:3001/roundtwo')
             <option value='niece'>Niece</option>
             <option value='cousin'>Cousin</option>
             <option value='pet'>Pet</option>
+          </select>
+          <p>Where are you based?</p>
+          <select onChange={this.genHandleChange('locale')}>
+            {this.renderPlaces()}
           </select>
           <p>Add charities (optional)</p>
           <select onChange={this.genHandleChange('charity')}>
@@ -149,10 +173,14 @@ return axios.get('http://localhost:3001/roundtwo')
     <PersonInfo
         name={this.state.profile.name}
         imgUrl={this.state.profile.imgUrl}
-        deathDate={this.state.profile.deathDate}
+        dob={this.state.profile.DoB}
         likes={this.state.profile.likes}
         funeralDate = {this.state.profile.funeralDate}
         charityUrl = {this.state.profile.charityUrl}
+        bool = {this.state.bool}
+        locale = {this.state.input.locale}
+        relation = {this.state.input.relation}
+        eulogy = {this.props.eulogy}
     />
       <Combox comments = {this.state.comments} />
       <form >
@@ -188,3 +216,91 @@ this.setState({
 }
 
 export default App;
+
+
+var str = `
+Buckinghamshire Area
+Isle of Wight Area
+North Hampshire Area 
+Oxfordshire and West Berkshire Area
+South Hampshire Area 
+South West Surrey Area 
+Surrey East Area 
+Surrey North Area 
+Thames Valley Berkshire Area 
+West Sussex Area
+Bexley and Bromley Area
+Croydon Branch
+East Kent with Swale Area
+East Sussex Area
+Greenwich Area
+Kensington and Chelsea and Hammersmith and Fulham Area
+Lambeth Branch
+Maidstone and Medway Area 
+Richmond upon Thames Area
+South Kent Area
+West Kent Branch
+Bath and District Area
+Bristol and District Area
+Cornwall Area
+Devon Area
+Dorset Area
+New Forest Area
+Somerset Area
+Eastern England
+Bedfordshire Area
+Cambridge with Fenland and Uttlesford Area
+Essex Area
+Hertfordshire Area
+Huntingdonshire Branch
+Norwich and Central Norfolk Area
+Peterborough Branch
+Suffolk Area
+East Midlands
+Boston and District Branch
+Derbyshire and East Staffordshire Area
+Leicestershire Area
+Lincoln Branch
+Northamptonshire Area 
+Nottinghamshire Area
+Stamford and Bourne Branch
+Birmingham Area
+Coventry and Warwickshire Area
+Gloucestershire Area
+Herefordshire Area
+Sandwell and Walsall Area
+Shropshire, Telford and Wrekin Area
+South Staffordshire Area
+Wolverhampton and Dudley Area
+Worcestershire Branch
+Wales
+Cardiff and the Vale Area
+Gwent Area
+Merthyr Tydfil, Rhondda Cynon Taff Area
+Morgannwg Branch
+North Wales Area
+Powys Area
+West Wales Area
+Craven and Bradford District Area
+Doncaster and Rotherham Area
+Hull and East Riding Area
+Kirklees Area
+Leeds Area
+Pontefract and Wakefield Branch
+Sheffield Branch
+South Humber Area
+York and North Yorkshire Area
+Cumbria Area
+Lancashire Area
+Manchester Area
+Wirral Area
+Tees Valley and Durham Area
+Tyneside Area
+Armagh and Dungannon Branch
+Belfast Area
+Foyle Area
+Newry and Mourne Branch
+North Down and Ards Area
+Northern Area
+Northern Ireland Main
+Omagh and Fermanagh Branch`
