@@ -22,7 +22,7 @@ class App extends Component {
         charity: '',
         locale:'',
         postcode:'',
-        des:''
+        eulogy:''
       },
       comments:['this is a comment'],
       value:'',
@@ -66,6 +66,7 @@ addCommentToState(comment){
     postcode: this.state.input.postcode,
     locale: this.state.input.locale,
     relation:this.state.input.relation,
+    eulogy:this.state.input.eulogy
   }
     
 
@@ -114,7 +115,7 @@ renderPlaces(){
           <p>Funeral date (optional)</p>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
           <p>message about this person</p>
-          <textarea type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
+          <textarea type='text-area' name='dof' onChange={this.genHandleChange('eulogy')}/>
 
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
@@ -179,6 +180,7 @@ renderPlaces(){
         bool = {this.state.bool}
         locale = {this.state.input.locale}
         relation = {this.state.input.relation}
+        eulogy = {this.props.eulogy}
     />
       <Combox comments = {this.state.comments} />
       <form >
