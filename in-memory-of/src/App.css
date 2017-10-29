@@ -1,11 +1,16 @@
 body {
   background-color: #E8EEF2;
   font-family: 'Lato', sans-serif;
-  color: #404042;
+  color: rgb(39, 47, 51);
 }
 
-a{
-  color: #ff9a52;
+a {
+  text-decoration: none;
+  color: rgb(39, 47, 51);
+  font-weight: bold;
+}
+a:visited{
+  color: rgb(39, 47, 51);
 }
 
 .PersonInfo {
@@ -13,7 +18,6 @@ a{
 }
 
 .profileHead{
-  color: #fff;
   background-color: #849AA8;
   display: flex;
   justify-content: center;
@@ -40,4 +44,59 @@ profileDetails{
   width: 80%;
   margin: 0 10%;
   float: right;
+}
+
+.topImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 30px;
+  margin: 0 25px;
+  box-shadow: 0 0 3px 2px #000;
+}
+
+.profileInfo {
+  padding-top: 20px;
+  text-align: left;
+}
+
+.comment {
+  text-align: center;
+  border: 1px solid #849AA8;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 6px
+}
+
+.comment:hover {
+  transition-property: background-color, box-shadow;
+  transition-duration: 0.1s;
+  background-color: rgb(211, 218, 222);
+  box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.5);
+}
+
+.navbar{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.navBtn {
+  padding: 3px 10px;
+  border-radius: 25px;
+  border: 2px solid rgb(85, 102, 111);
+  margin: 10px;
+  background-color: rgb(150, 175, 191);
+}
+
+.navBtn:hover{
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  background-color: rgb(113, 132, 143);
+}
+
+.ProfileForm{
+  background-color: rgb(211, 218, 222);
+  padding: 30px;
+  margin: 2% 30%;
+  border-radius: 25px;
 }

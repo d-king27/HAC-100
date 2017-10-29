@@ -91,11 +91,6 @@ renderPlaces(){
         <form>
           <h3>Create a tribute</h3>
           <p>Please fill in this form to generate a tribute</p>
-
-          <p>First name</p>
-          <input type='text' name='lname' onChange={this.genHandleChange('firstName')}/>
-          <p>Last name</p>
-          <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
           <p>enter a url for the image to be displayed</p>
           <input type='text' name='fname' onChange={this.genHandleChange('imgUrl')}/>
           <p>Date of birth</p>
@@ -171,7 +166,7 @@ renderPlaces(){
       <Combox comments = {this.state.comments} />
       <form >
           <label>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <textarea type="text-area" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" onClick={this.handleSubmit} />
         </form>
@@ -208,7 +203,6 @@ this.setState({
     const style = {display: this.state.style }
     return (
       <div className="App">  
-        <img src = '' id = 'profileImage' style = {style}/>
         {this.renderForm(user)}
         {this.renderBody(user)}
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import 'uikit'
 
 class Combox extends React.Component {
   constructor(props) {
@@ -6,16 +7,18 @@ class Combox extends React.Component {
     this.renderComments = this.renderComments.bind(this)
   }
 renderComments(){
-  const style = { outlineStyle: "solid" };
   return this.props.comments.map((item)=>{
-    return <p style={style}> {item}</p>
+    return (
+      <div className='comment'>
+        <p key={item}> {item}</p>
+      </div>
+    )
   })
 }
   render() {
-    const style = { outlineStyle: "solid" };
     return (
-      <div id="combox">
-        <h1>Please Leave a message</h1>
+      <div id="combox uk-card uk-card-default">
+        <h3>Please Leave a message</h3>
         {this.renderComments()}
       </div>
     );
