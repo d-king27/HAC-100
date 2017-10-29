@@ -93,7 +93,9 @@ return axios.get('http://localhost:3001/roundtwo')
           <input type='text' name='fname' onChange={this.genHandleChange('lastName')}/>
           <input type='date' name='dob' onChange={this.genHandleChange('DoB')}/>
           <input type='date' name='dof' onChange={this.genHandleChange('DoF')}/>
-          
+
+
+
           <p>What relation was your loved one?</p>
           <select onChange={this.genHandleChange('relation')}>
             <option value=''>select relation</option>
@@ -110,18 +112,44 @@ return axios.get('http://localhost:3001/roundtwo')
             <option value='cousin'>Cousin</option>
             <option value='pet'>Pet</option>
           </select>
+
+
+
+          <p>Please enter your location</p>
+          <input type='text' name='location' placeholder='Please enter your location'/>
+
+
+
+          <p>Select your interests</p>
+          <select className ="likeList">
+            <option value = ''>select interests</option>
+            <option value = 'nature'>nature</option>
+            <option value = 'music'>music</option>
+            <option value = 'films'>films</option>
+            <option value = 'food'>food</option>
+            <option value = 'traveling'>traveling</option>
+            <option value = 'sports'>sports</option>
+          </select>
+
+
+
           <p>Username</p>
           <input type='text' name="username" onChange={this.genHandleChange('fbUser')}/>
           <p>Password</p>
+
+
           <input type='password' name="password" onChange={this.genHandleChange('fbPass')}/>
           <input type="submit" value="Submit" onClick={this.formHandleSubmit} />
           <p>Add charities</p>
+
+
           <select onChange={this.genHandleChange('charity')}>
             <option>select</option>
             <option>Macmillan</option>
             <option>Oxfam</option>
             <option>Cancer Research</option>
           </select>
+          
         </form>
       </div>
     )

@@ -16,7 +16,8 @@ this.handleSubmit = this.handleSubmit.bind(this)
         <form>
           <h1>Title</h1>
           <input type='checkbox' name='Auth-check' value="Facebook authentication keys?"/>
-          <input type='text' name='lname'/>
+          <input type='text' name='lname' />
+          {/* <input type='text' name='location'/> */}
           <input type='date' name='dob'/>
           <p>What relation was your loved one?</p>
           <select>
