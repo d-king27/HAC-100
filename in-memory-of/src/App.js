@@ -35,7 +35,8 @@ class App extends Component {
         charityUrl: ''
 
       },
-      Bool:false
+      Bool:false,
+      style:'inline'
     }
   this.addCommentToState = this.addCommentToState.bind(this);
   this.handleChange = this.handleChange.bind(this);
@@ -46,6 +47,7 @@ class App extends Component {
   this.formHandleSubmit = this.formHandleSubmit.bind(this);
   this.genHandleChange = this.genHandleChange.bind(this);
   this.renderPlaces = this.renderPlaces.bind(this)
+  this.changeStyle = this.changeStyle.bind(this);
   }
 
 addCommentToState(comment){
@@ -68,23 +70,12 @@ addCommentToState(comment){
     relation:this.state.input.relation,
     eulogy:this.state.input.eulogy
   }
-    
 
-console.log('called')
-return axios.get('http://localhost:3001')
-.then((response) =>{
-  
-  newProf.imgUrl = response.data.imgUrl
-  newProf.likes = response.data.likes
-return axios.get('http://localhost:3001/roundtwo')
-.then((respo)=>{
   this.setState({
     profile:newProf,
     Bool:true
   })
 
-})
-})
  }
 
 
@@ -204,12 +195,27 @@ this.setState({
   })
 
 }
+changeStyle(event) {
+  if(this.state.style === 'none') {
+    this.setState({
+      style: 'inline'
+    })
+  }
+  else {
+this.setState({
+    style: 'none'
+  })
+  }
+}
 
   render() {
+    const style = {display: this.state.style }
     return (
       <div className="App">  
+        <img src = '' id = 'profileImage' style = {style}/>
          {this.renderForm()}
         {this.renderBody()}
+        <button onClick={this.changeStyle}>click me </button>
       </div>
     );
   }

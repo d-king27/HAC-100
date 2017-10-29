@@ -41,12 +41,12 @@ class App extends Component {
                 <div className="profileHead">
                     <div className="PersonImage">
                         <div>
-                            <img src={this.props.imgUrl} className='profileImg'/>
+                            <img src="" id='profileImage'/>
                         </div>
                     </div>
                     <div className="profileInfo">
                         <h2>this tribute was set up with deepest symapthy by {this.props.name}'s {this.props.relation}</h2>
-                        <h2>{this.props.name}</h2>
+                        <h2 id="profileName">{this.props.name}</h2>
                         <h3>Born on {this.props.dob}</h3>
                         <h3>Funeral to be held on {this.props.funeralDate}</h3>
                     </div>
@@ -65,6 +65,7 @@ class App extends Component {
 
 
                 </div>
+                <img src = "" id= "profileImage"/>
             </div>
         )
     }
